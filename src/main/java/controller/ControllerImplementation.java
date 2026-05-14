@@ -513,9 +513,11 @@ public class ControllerImplementation implements IController, ActionListener {
      * This function deletes all the people registered. If there is any access
      * problem with the storage device, the program stops.
      */
+    
     @Override
     public void deleteAll() {
         try {
+            
             dao.deleteAll();
         } catch (Exception ex) {
             if (ex instanceof FileNotFoundException || ex instanceof IOException
