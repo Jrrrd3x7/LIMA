@@ -29,11 +29,10 @@ import org.jdatepicker.JDatePicker;
  * @version 1.1.0
  */
 public class Insert extends javax.swing.JDialog {
-    
+
     private ControllerImplementation controller;
 
-
-    public Insert(java.awt.Frame parent, boolean modal, ControllerImplementation controller){
+    public Insert(java.awt.Frame parent, boolean modal, ControllerImplementation controller) {
         super(parent, modal);
         initComponents();
         DropPhotoListener d = new DropPhotoListener(photo, this);
@@ -333,13 +332,18 @@ public class Insert extends javax.swing.JDialog {
             showInsert();
         }
     }//GEN-LAST:event_nifKeyPressed
-    private void insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertActionPerformed
+    private void insertActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             controller.handleInsertPerson();
             JOptionPane.showMessageDialog(this, "Person inserted successfully!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
+    }
+
+    private void dateOfBirthActionPerformed(java.awt.event.ActionEvent evt) {
+        // No action needed
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdatepicker.JDatePicker dateOfBirth;
     private javax.swing.JButton insert;
