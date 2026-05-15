@@ -267,7 +267,7 @@ public class ControllerImplementation implements IController, ActionListener {
     }
 
     public void handleDeleteAction() {
-        delete = new Delete(menu, true);
+        delete = new Delete(menu, true, this);
         delete.getDelete().addActionListener(this);
         delete.setVisible(true);
     }
