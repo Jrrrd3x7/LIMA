@@ -340,6 +340,10 @@ public class Insert extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }
+
+    private void dateOfBirthActionPerformed(java.awt.event.ActionEvent evt) {
+        // No action needed
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdatepicker.JDatePicker dateOfBirth;
     private javax.swing.JButton insert;
