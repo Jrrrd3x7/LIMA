@@ -1,5 +1,6 @@
 package view;
 
+import controller.ControllerImplementation;
 import static utils.DataValidation.calculateNifLetter;
 import static utils.DataValidation.isLetter;
 import static utils.DataValidation.isNumber;
@@ -9,29 +10,36 @@ import java.awt.event.KeyEvent;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import model.entity.Person;
 import org.jdatepicker.DateModel;
 import org.jdatepicker.JDatePicker;
 
 /**
- * Interface used to register a person. It is mandatory to enter at least the 
+ * Interface used to register a person. It is mandatory to enter at least the
  * NIF and the name.
+ *
  * @author Francesc Perez
  * @version 1.1.0
  */
 public class Insert extends javax.swing.JDialog {
+    
+    private ControllerImplementation controller;
 
-    public Insert(java.awt.Frame parent, boolean modal) {
+
+    public Insert(java.awt.Frame parent, boolean modal, ControllerImplementation controller){
         super(parent, modal);
         initComponents();
         DropPhotoListener d = new DropPhotoListener(photo, this);
         DropTarget dropTarget = new DropTarget(photo, d);
         insert.setEnabled(false);
+        this.controller = controller;
     }
 
     public JButton getReset() {
@@ -325,15 +333,13 @@ public class Insert extends javax.swing.JDialog {
             showInsert();
         }
     }//GEN-LAST:event_nifKeyPressed
-
-    private void dateOfBirthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateOfBirthActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dateOfBirthActionPerformed
-
     private void insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_insertActionPerformed
-
+        try {
+            controller.handleInsertPerson();
+            JOptionPane.showMessageDialog(this, "Person inserted successfully!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdatepicker.JDatePicker dateOfBirth;
     private javax.swing.JButton insert;

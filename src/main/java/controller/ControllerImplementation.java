@@ -221,12 +221,12 @@ public class ControllerImplementation implements IController, ActionListener {
     }
 
     private void handleInsertAction() {
-        insert = new Insert(menu, true);
+        insert = new Insert(menu, true, this);
         insert.getInsert().addActionListener(this);
         insert.setVisible(true);
     }
 
-    private void handleInsertPerson() {
+    public void handleInsertPerson() {
         Person p = new Person(insert.getNam().getText(), insert.getNif().getText());
         if (insert.getDateOfBirth().getModel().getValue() != null) {
             p.setDateOfBirth(((GregorianCalendar) insert.getDateOfBirth().getModel().getValue()).getTime());
