@@ -1,5 +1,6 @@
 package view;
 
+import controller.ControllerImplementation;
 import java.awt.Color;
 import static utils.DataValidation.calculateNifLetter;
 import static utils.DataValidation.isLetter;
@@ -28,7 +29,9 @@ import utils.Placeholders;
  */
 public class Update extends javax.swing.JDialog {
 
-    public Update(java.awt.Frame parent, boolean modal) {
+    private ControllerImplementation controller;
+
+    public Update(java.awt.Frame parent, boolean modal, ControllerImplementation controller) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -36,6 +39,7 @@ public class Update extends javax.swing.JDialog {
         DropTarget dropTarget = new DropTarget(photo, d);
         read.setVisible(false);
         update.setEnabled(false);
+        this.controller = controller;
     }
 
     public JButton getUpdate() {
@@ -98,6 +102,11 @@ public class Update extends javax.swing.JDialog {
         update.setMaximumSize(new java.awt.Dimension(194, 33));
         update.setMinimumSize(new java.awt.Dimension(194, 33));
         update.setPreferredSize(new java.awt.Dimension(194, 33));
+        update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
@@ -360,14 +369,14 @@ public class Update extends javax.swing.JDialog {
     }//GEN-LAST:event_nameKeyReleased
 
     private void nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameMouseClicked
-        if (name.getText().equals("Enter full name")) {
+        if (name.getText().equals(Placeholders.NAME)) {
             name.setText("");
             name.setForeground(Color.black);
         }
     }//GEN-LAST:event_nameMouseClicked
 
     private void nifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nifMouseClicked
-        if (nif.getText().equals("Enter NIF number, letter is calculated (e.g., 12345678)")) {
+        if (nif.getText().equals(Placeholders.NIF)) {
             nif.setText("");
             nif.setForeground(Color.black);
         }
@@ -375,14 +384,14 @@ public class Update extends javax.swing.JDialog {
 
     private void nifFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nifFocusLost
         if (nif.getText().isEmpty()) {
-            nif.setText("Enter NIF number, letter is calculated (e.g., 12345678)");
+            nif.setText(Placeholders.NIF);
             nif.setForeground(Color.gray);
         }
     }//GEN-LAST:event_nifFocusLost
 
     private void nameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFocusLost
         if (name.getText().isEmpty()) {
-            name.setText("Enter full name");
+            name.setText(Placeholders.NAME);
             name.setForeground(Color.gray);
         }
     }//GEN-LAST:event_nameFocusLost
@@ -394,6 +403,15 @@ public class Update extends javax.swing.JDialog {
     private void nameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_nameKeyTyped
+
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+        try {
+            controller.handleUpdatePerson();
+            JOptionPane.showMessageDialog(this, "Person updated successfully!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_updateActionPerformed
 
     /**
      * @param args the command line arguments
