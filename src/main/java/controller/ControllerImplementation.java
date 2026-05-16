@@ -281,7 +281,7 @@ public class ControllerImplementation implements IController, ActionListener {
     }
 
     public void handleUpdateAction() {
-        update = new Update(menu, true);
+        update = new Update(menu, true, this);
         update.getUpdate().addActionListener(this);
         update.getRead().addActionListener(this);
         update.setVisible(true);
