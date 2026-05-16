@@ -1,6 +1,8 @@
 package view;
 
 import controller.ControllerImplementation;
+import java.awt.Color;
+import utils.Placeholders;
 import static utils.DataValidation.calculateNifLetter;
 import static utils.DataValidation.isLetter;
 import static utils.DataValidation.isNumber;
@@ -122,10 +124,25 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         getContentPane().add(jLabel1, gridBagConstraints);
 
+        name.setForeground(new java.awt.Color(153, 153, 153));
+        name.setText("Enter full name");
         name.setMaximumSize(new java.awt.Dimension(400, 22));
         name.setMinimumSize(new java.awt.Dimension(400, 22));
         name.setPreferredSize(new java.awt.Dimension(400, 22));
+        name.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nameFocusLost(evt);
+            }
+        });
+        name.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nameMouseClicked(evt);
+            }
+        });
         name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nameKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 nameKeyReleased(evt);
             }
@@ -196,9 +213,24 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(24, 12, 12, 12);
         getContentPane().add(jLabel5, gridBagConstraints);
 
+        nif.setForeground(new java.awt.Color(153, 153, 153));
+        nif.setText("Enter NIF number, letter is calculated (e.g., 12345678)");
         nif.setMaximumSize(new java.awt.Dimension(400, 22));
         nif.setMinimumSize(new java.awt.Dimension(400, 22));
         nif.setPreferredSize(new java.awt.Dimension(400, 22));
+        nif.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                nifFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nifFocusLost(evt);
+            }
+        });
+        nif.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nifMouseClicked(evt);
+            }
+        });
         nif.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 nifKeyPressed(evt);
@@ -293,6 +325,10 @@ public class Insert extends javax.swing.JDialog {
     }//GEN-LAST:event_resetActionPerformed
 
     private void nifKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyTyped
+        if (nif.getText().equals(Placeholders.NIF)) {
+            nif.setText("");
+            nif.setForeground(java.awt.Color.BLACK);
+        }
         if (!isNumber(evt.getKeyChar()) && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE && evt.getKeyChar() != KeyEvent.VK_DELETE) {
             JOptionPane.showMessageDialog(this, "Type only numbers [0-9]", this.getTitle(), JOptionPane.ERROR_MESSAGE);
             evt.consume();
@@ -332,6 +368,42 @@ public class Insert extends javax.swing.JDialog {
             showInsert();
         }
     }//GEN-LAST:event_nifKeyPressed
+
+    private void nifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nifMouseClicked
+        if (nif.getText().equals(Placeholders.NIF)) {
+            nif.setText("");
+            nif.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_nifMouseClicked
+
+    private void nifFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nifFocusLost
+        if (nif.getText().isEmpty()) {
+            nif.setText(Placeholders.NIF);
+            nif.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_nifFocusLost
+
+    private void nameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameKeyPressed
+
+    private void nameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFocusLost
+        if (name.getText().isEmpty()) {
+            name.setText(Placeholders.NAME);
+            name.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_nameFocusLost
+
+    private void nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameMouseClicked
+        if (name.getText().equals(Placeholders.NAME)) {
+            name.setText("");
+            name.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_nameMouseClicked
+
+    private void nifFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nifFocusGained
+
+    }//GEN-LAST:event_nifFocusGained
     private void insertActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             controller.handleInsertPerson();
