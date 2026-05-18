@@ -117,7 +117,7 @@ public class ControllerImplementation implements IController, ActionListener {
             handleReadAll();
         } else if (e.getSource() == menu.getDeleteAll()) {
             handleDeleteAll();
-        } 
+        }
     }
 
     private void handleDataStorageSelection() {
@@ -367,7 +367,7 @@ public class ControllerImplementation implements IController, ActionListener {
         File file = new File("people_data_" + date + ".csv");
 
         // Llama al método readAll() del controlador, que devuelve todas las personas del DAO
-        ArrayList<Person> people = readAll();  
+        ArrayList<Person> people = readAll();
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
             // Itera sobre cada persona del ArrayList
@@ -379,6 +379,8 @@ public class ControllerImplementation implements IController, ActionListener {
                         person.getPhoto() != null ? "yes" : "no"
                 ));
             }
+
+            JOptionPane.showMessageDialog(menu, "Data exported successfully as people_data_" + date + ".csv");
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
