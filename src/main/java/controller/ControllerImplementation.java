@@ -22,12 +22,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -286,7 +290,7 @@ public class ControllerImplementation implements IController, ActionListener {
     }
 
     public void handleUpdateAction() {
-        update = new Update(menu, true);
+        update = new Update(menu, true, this);
         update.getUpdate().addActionListener(this);
         update.getRead().addActionListener(this);
         update.setVisible(true);
@@ -340,6 +344,7 @@ public class ControllerImplementation implements IController, ActionListener {
             JOptionPane.showMessageDialog(menu, "There are not people registered yet.", "Read All - People v1.1.0", JOptionPane.WARNING_MESSAGE);
         } else {
             readAll = new ReadAll(menu, true);
+            this.readAll.setController(this); //botón  dentro de ReadAll pueda llama controller.handleExportCSV()
             DefaultTableModel model = (DefaultTableModel) readAll.getTable().getModel();
             for (int i = 0; i < s.size(); i++) {
                 model.addRow(new Object[i]);
@@ -357,6 +362,32 @@ public class ControllerImplementation implements IController, ActionListener {
                 }
             }
             readAll.setVisible(true);
+        }
+    }
+
+    @Override
+    public void handleExportCSV() {
+        //Obtiene la fecha actual
+        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        File file = new File("people_data_" + date + ".csv");
+
+        // Llama al método readAll() del controlador, que devuelve todas las personas del DAO
+        ArrayList<Person> people = readAll();
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
+            // Itera sobre cada persona del ArrayList
+            for (Person person : people) {
+                writer.println(String.join(",",
+                        person.getNif(),
+                        person.getName(),
+                        person.getDateOfBirth() != null ? person.getDateOfBirth().toString() : "",
+                        person.getPhoto() != null ? "yes" : "no"
+                ));
+            }
+
+            JOptionPane.showMessageDialog(menu, "Data exported successfully as people_data_" + date + ".csv");
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 
