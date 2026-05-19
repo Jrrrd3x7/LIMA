@@ -315,6 +315,33 @@ public class Read extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_readActionPerformed
 
+    private void nameFocusLost(java.awt.event.FocusEvent evt) {
+        if (name.getText().isEmpty()) {
+            name.setForeground(new java.awt.Color(153, 153, 153));
+            name.setText("Enter full name");
+        }
+    }
+
+    private void nameMouseClicked(java.awt.event.MouseEvent evt) {
+        if (name.getText().equals("Enter full name")) {
+            name.setText("");
+            name.setForeground(java.awt.Color.BLACK);
+        }
+    }
+
+    private void nifMouseClicked(java.awt.event.MouseEvent evt) {
+        if (nif.getText().equals("Enter NIF number, letter is calculated (e.g., 12345678)")) {
+            nif.setText("");
+            nif.setForeground(java.awt.Color.BLACK);
+        }
+    }
+
+    private void nifFocusLost(java.awt.event.FocusEvent evt) {
+        if (nif.getText().isEmpty()) {
+            nif.setForeground(new java.awt.Color(153, 153, 153));
+            nif.setText("Enter NIF number, letter is calculated (e.g., 12345678)");
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdatepicker.JDatePicker dateOfBirth;
     private javax.swing.JLabel jLabel1;
