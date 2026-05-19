@@ -29,7 +29,7 @@ import utils.Placeholders;
  */
 public class Update extends javax.swing.JDialog {
 
-    private ControllerImplementation controller;
+    private final ControllerImplementation controller;
 
     public Update(java.awt.Frame parent, boolean modal, ControllerImplementation controller) {
         super(parent, modal);

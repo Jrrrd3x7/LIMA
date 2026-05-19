@@ -123,7 +123,7 @@ public class ControllerImplementation implements IController, ActionListener {
             handleCountAction();
         }
     }
-
+    
     private void handleDataStorageSelection() {
         String daoSelected = ((javax.swing.JCheckBox) (dSS.getAccept()[1])).getText();
         dSS.dispose();
@@ -149,7 +149,7 @@ public class ControllerImplementation implements IController, ActionListener {
         }
         setupMenu();
     }
-
+    
     private void setupFileStorage() {
         File folderPath = new File(Routes.FILE.getFolderPath());
         File folderPhotos = new File(Routes.FILE.getFolderPhotos());
@@ -166,7 +166,7 @@ public class ControllerImplementation implements IController, ActionListener {
         }
         dao = new DAOFile();
     }
-
+    
     private void setupFileSerialization() {
         File folderPath = new File(Routes.FILES.getFolderPath());
         File dataFile = new File(Routes.FILES.getDataFile());
@@ -181,7 +181,7 @@ public class ControllerImplementation implements IController, ActionListener {
         }
         dao = new DAOFileSerializable();
     }
-
+    
     private void setupSQLDatabase() {
         try {
             Connection conn = DriverManager.getConnection(Routes.DB.getDbServerAddress() + Routes.DB.getDbServerComOpt(),
@@ -203,7 +203,7 @@ public class ControllerImplementation implements IController, ActionListener {
         }
         dao = new DAOSQL();
     }
-
+    
     private void setupJPADatabase() {
         try {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory(Routes.DBO.getDbServerAddress());
@@ -216,7 +216,7 @@ public class ControllerImplementation implements IController, ActionListener {
         }
         dao = new DAOJPA();
     }
-
+    
     private void setupMenu() {
         menu = new Menu();
         menu.setVisible(true);
@@ -228,13 +228,13 @@ public class ControllerImplementation implements IController, ActionListener {
         menu.getDeleteAll().addActionListener(this);
         menu.getCount().addActionListener(this);
     }
-
+    
     private void handleInsertAction() {
         insert = new Insert(menu, true, this);
         //insert.getInsert().addActionListener(this); lo llama 2 veces
         insert.setVisible(true);
     }
-
+    
     public void handleInsertPerson() {
         Person p = new Person(insert.getNam().getText(), insert.getNif().getText());
         if (insert.getDateOfBirth().getModel().getValue() != null) {
@@ -243,16 +243,18 @@ public class ControllerImplementation implements IController, ActionListener {
         if (insert.getPhoto().getIcon() != null) {
             p.setPhoto((ImageIcon) insert.getPhoto().getIcon());
         }
+        p.setPhoneNumber(insert.getPhone().getText());
+        p.setPostalCode(insert.getPostalCode().getText());
         insert(p);
         insert.getReset().doClick();
     }
-
+    
     private void handleReadAction() {
         read = new Read(menu, true);
         read.getRead().addActionListener(this);
         read.setVisible(true);
     }
-
+    
     private void handleReadPerson() {
         Person p = new Person(read.getNif().getText());
         Person pNew = read(p);
@@ -274,13 +276,13 @@ public class ControllerImplementation implements IController, ActionListener {
             read.getReset().doClick();
         }
     }
-
+    
     public void handleDeleteAction() {
         delete = new Delete(menu, true, this);
         delete.getDelete().addActionListener(this);
         delete.setVisible(true);
     }
-
+    
     public void handleDeletePerson() {
         if (delete != null) {
             Person p = new Person(delete.getNif().getText());
@@ -288,14 +290,14 @@ public class ControllerImplementation implements IController, ActionListener {
             delete.getReset().doClick();
         }
     }
-
+    
     public void handleUpdateAction() {
         update = new Update(menu, true, this);
         update.getUpdate().addActionListener(this);
         update.getRead().addActionListener(this);
         update.setVisible(true);
     }
-
+    
     public void handleReadForUpdate() {
         if (update != null) {
             Person p = new Person(update.getNif().getText());
@@ -323,7 +325,7 @@ public class ControllerImplementation implements IController, ActionListener {
             }
         }
     }
-
+    
     public void handleUpdatePerson() {
         if (update != null) {
             Person p = new Person(update.getNam().getText(), update.getNif().getText());
@@ -337,7 +339,7 @@ public class ControllerImplementation implements IController, ActionListener {
             update.getReset().doClick();
         }
     }
-
+    
     public void handleReadAll() {
         ArrayList<Person> s = readAll();
         if (s.isEmpty()) {
@@ -364,7 +366,7 @@ public class ControllerImplementation implements IController, ActionListener {
             readAll.setVisible(true);
         }
     }
-
+    
     @Override
     public void handleExportCSV() {
         //Obtiene la fecha actual
@@ -373,7 +375,7 @@ public class ControllerImplementation implements IController, ActionListener {
 
         // Llama al método readAll() del controlador, que devuelve todas las personas del DAO
         ArrayList<Person> people = readAll();
-
+        
         try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
             // Itera sobre cada persona del ArrayList
             for (Person person : people) {
@@ -384,13 +386,13 @@ public class ControllerImplementation implements IController, ActionListener {
                         person.getPhoto() != null ? "yes" : "no"
                 ));
             }
-
+            
             JOptionPane.showMessageDialog(menu, "Data exported successfully as people_data_" + date + ".csv");
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
     }
-
+    
     public void handleDeleteAll() {
         Object[] options = {"Yes", "No"};
         //int answer = JOptionPane.showConfirmDialog(menu, "Are you sure to delete all people registered?", "Delete All - People v1.1.0", 0, 0);
@@ -404,13 +406,13 @@ public class ControllerImplementation implements IController, ActionListener {
                 options,
                 options[1] // Default selection is "No"
         );
-
+        
         if (answer == 0) {
             deleteAll();
             JOptionPane.showMessageDialog(null, "All persons have been deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-
+    
     private void handleCountAction() {
         count = new Count(menu, true, this);
         count.gretCountLabel().setText(String.valueOf(readAll().size()));
@@ -560,7 +562,7 @@ public class ControllerImplementation implements IController, ActionListener {
     @Override
     public void deleteAll() {
         try {
-
+            
             dao.deleteAll();
         } catch (Exception ex) {
             if (ex instanceof FileNotFoundException || ex instanceof IOException
@@ -571,5 +573,5 @@ public class ControllerImplementation implements IController, ActionListener {
             }
         }
     }
-
+    
 }

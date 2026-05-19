@@ -28,6 +28,7 @@ public class Person implements Serializable {
     @Lob
     private byte[] photoOnlyJPA;
     private String phoneNumber;
+    private String postalCode;
 
     public Person() {
 
@@ -63,20 +64,22 @@ public class Person implements Serializable {
      * @param dateOfBirth
      * @param photo
      * @param phoneNumber
+     * @param postalCode
      */
-    
     //constructor utilizado para añadir numero
-    public Person(String name, String nif, Date dateOfBirth, ImageIcon photo, String phoneNumber) {
+    public Person(String name, String nif, Date dateOfBirth, ImageIcon photo, String phoneNumber, String postalCode) {
         this.name = name;
         this.nif = nif;
         this.dateOfBirth = dateOfBirth;
         this.photo = photo;
         this.phoneNumber = phoneNumber;
+        this.postalCode = postalCode;
     }
 //constructor DAO
-    public Person(String nif, String name, Date dateOfBirth, ImageIcon photo) {
-        this.nif = nif;
+
+    public Person(String name, String nif, Date dateOfBirth, ImageIcon photo) {
         this.name = name;
+        this.nif = nif;
         this.dateOfBirth = dateOfBirth;
         this.photo = photo;
 
@@ -129,6 +132,14 @@ public class Person implements Serializable {
 
     public void setPhotoOnlyJPA(byte[] photoOnlyJPA) {
         this.photoOnlyJPA = photoOnlyJPA;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
     /**
