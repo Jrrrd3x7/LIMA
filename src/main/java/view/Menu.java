@@ -47,6 +47,10 @@ public class Menu extends javax.swing.JFrame {
     public JButton getDeleteAll() {
         return deleteAll;
     }
+    
+    public JButton getCount(){
+        return count;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,11 +64,12 @@ public class Menu extends javax.swing.JFrame {
 
         read = new javax.swing.JButton();
         delete = new javax.swing.JButton();
-        update = new javax.swing.JButton();
         insert = new javax.swing.JButton();
+        update = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         readAll = new javax.swing.JButton();
         deleteAll = new javax.swing.JButton();
+        count = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu - People v1.1.0");
@@ -99,6 +104,24 @@ public class Menu extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(delete, gridBagConstraints);
 
+        insert.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        insert.setText("INSERT");
+        insert.setMaximumSize(new java.awt.Dimension(120, 50));
+        insert.setMinimumSize(new java.awt.Dimension(120, 50));
+        insert.setPreferredSize(new java.awt.Dimension(120, 50));
+        insert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insertActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(24, 24, 12, 24);
+        getContentPane().add(insert, gridBagConstraints);
+
         update.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         update.setText("UPDATE");
         update.setMaximumSize(new java.awt.Dimension(120, 50));
@@ -111,19 +134,6 @@ public class Menu extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(update, gridBagConstraints);
-
-        insert.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        insert.setText("INSERT");
-        insert.setMaximumSize(new java.awt.Dimension(120, 50));
-        insert.setMinimumSize(new java.awt.Dimension(120, 50));
-        insert.setPreferredSize(new java.awt.Dimension(120, 50));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(24, 24, 12, 24);
-        getContentPane().add(insert, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 8)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -154,6 +164,11 @@ public class Menu extends javax.swing.JFrame {
         deleteAll.setMaximumSize(new java.awt.Dimension(120, 50));
         deleteAll.setMinimumSize(new java.awt.Dimension(120, 50));
         deleteAll.setPreferredSize(new java.awt.Dimension(120, 50));
+        deleteAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteAllActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -162,11 +177,32 @@ public class Menu extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(deleteAll, gridBagConstraints);
 
+        count.setText("COUNT");
+        count.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                countActionPerformed(evt);
+            }
+        });
+        getContentPane().add(count, new java.awt.GridBagConstraints());
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void deleteAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAllActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteAllActionPerformed
+
+    private void insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_insertActionPerformed
+
+    private void countActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_countActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton count;
     private javax.swing.JButton delete;
     private javax.swing.JButton deleteAll;
     private javax.swing.JButton insert;

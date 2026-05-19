@@ -91,6 +91,11 @@ public class Read extends javax.swing.JDialog {
         read.setMaximumSize(new java.awt.Dimension(187, 33));
         read.setMinimumSize(new java.awt.Dimension(187, 33));
         read.setPreferredSize(new java.awt.Dimension(187, 33));
+        read.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                readActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
@@ -306,34 +311,9 @@ public class Read extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_nifKeyPressed
 
-    private void nifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nifMouseClicked
-        if (nif.getText().equals(Placeholders.NIF)) {
-            nif.setText("");
-            nif.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_nifMouseClicked
-
-    private void nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameMouseClicked
-        if (name.getText().equals(Placeholders.NAME)) {
-            name.setText("");
-            name.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_nameMouseClicked
-
-    private void nifFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nifFocusLost
-        if (nif.getText().isEmpty()) {
-            nif.setText(Placeholders.NIF);
-            nif.setForeground(Color.gray);
-        }
-    }//GEN-LAST:event_nifFocusLost
-
-    private void nameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFocusLost
-        if (name.getText().isEmpty()) {
-            name.setText(Placeholders.NAME);
-            name.setForeground(Color.gray);
-
-        }
-    }//GEN-LAST:event_nameFocusLost
+    private void readActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_readActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_readActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdatepicker.JDatePicker dateOfBirth;
