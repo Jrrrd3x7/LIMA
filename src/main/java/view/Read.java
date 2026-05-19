@@ -88,6 +88,11 @@ public class Read extends javax.swing.JDialog {
         read.setMaximumSize(new java.awt.Dimension(187, 33));
         read.setMinimumSize(new java.awt.Dimension(187, 33));
         read.setPreferredSize(new java.awt.Dimension(187, 33));
+        read.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                readActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
@@ -275,6 +280,10 @@ public class Read extends javax.swing.JDialog {
             read.doClick();
         }
     }//GEN-LAST:event_nifKeyPressed
+
+    private void readActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_readActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_readActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdatepicker.JDatePicker dateOfBirth;

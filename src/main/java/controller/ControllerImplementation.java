@@ -38,6 +38,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.jdatepicker.DateModel;
 import utils.Constants;
+import view.Count;
 
 /**
  * This class starts the visual part of the application and programs and manages
@@ -59,6 +60,7 @@ public class ControllerImplementation implements IController, ActionListener {
     private Delete delete;
     private Update update;
     private ReadAll readAll;
+    private Count count;
 
     /**
      * This constructor allows the controller to know which data storage option
@@ -113,6 +115,8 @@ public class ControllerImplementation implements IController, ActionListener {
             handleReadAll();
         } else if (e.getSource() == menu.getDeleteAll()) {
             handleDeleteAll();
+        } else if (e.getSource() == menu.getCount()) {
+            handleCountAction();
         }
     }
 
@@ -218,6 +222,7 @@ public class ControllerImplementation implements IController, ActionListener {
         menu.getDelete().addActionListener(this);
         menu.getReadAll().addActionListener(this);
         menu.getDeleteAll().addActionListener(this);
+        menu.getCount().addActionListener(this);
     }
 
     private void handleInsertAction() {
@@ -373,6 +378,12 @@ public class ControllerImplementation implements IController, ActionListener {
             deleteAll();
             JOptionPane.showMessageDialog(null, "All persons have been deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+
+    private void handleCountAction() {
+        count = new Count(menu, true, this);
+        count.gretCountLabel().setText(String.valueOf(readAll().size()));
+        count.setVisible(true);
     }
 
     /**
