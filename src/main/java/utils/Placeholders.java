@@ -14,4 +14,7 @@ public class Placeholders {
             = "Enter NIF number, letter is calculated (e.g., 12345678)";
     public static final String NAME
             = "Enter full name";
+    public static final String EMAIL = "Enter email";
+    public static final String PHONE = "Enter phone number";
+    public static final String POSTAL_CODE = "Enter postal code";
 }

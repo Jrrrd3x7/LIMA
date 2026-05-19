@@ -10,14 +10,16 @@ import javax.persistence.Transient;
 import javax.swing.ImageIcon;
 
 /**
- * Encapsulated class that defines the type of entity that will manage the application.
+ * Encapsulated class that defines the type of entity that will manage the
+ * application.
+ *
  * @author Fran Perez
  * @version 1.1.0
  */
 @Entity
-public class Person implements Serializable{
+public class Person implements Serializable {
 
-    @Id 
+    @Id
     private String nif;
     private String name;
     private Date dateOfBirth;
@@ -25,21 +27,24 @@ public class Person implements Serializable{
     private ImageIcon photo;
     @Lob
     private byte[] photoOnlyJPA;
+    private String phoneNumber;
 
-    public Person(){
-        
+    public Person() {
+
     }
-    
+
     /**
      * Constructor to validate new person. Two persons cannot have the same NIF
-     * @param nif 
+     *
+     * @param nif
      */
     public Person(String nif) {
         this.nif = nif;
     }
-    
+
     /**
      * Constructor with mandatory data.
+     *
      * @author Fran Perez
      * @version 1.0
      */
@@ -50,18 +55,31 @@ public class Person implements Serializable{
 
     /**
      * Constructor with all data
+     *
      * @author Fran Perez
      * @version 1.0
      * @param name
      * @param nif
      * @param dateOfBirth
      * @param photo
+     * @param phoneNumber
      */
-    public Person(String name, String nif, Date dateOfBirth, ImageIcon photo) {
-        this.name = name;      
+    
+    //constructor utilizado para añadir numero
+    public Person(String name, String nif, Date dateOfBirth, ImageIcon photo, String phoneNumber) {
+        this.name = name;
         this.nif = nif;
         this.dateOfBirth = dateOfBirth;
         this.photo = photo;
+        this.phoneNumber = phoneNumber;
+    }
+//constructor DAO
+    public Person(String nif, String name, Date dateOfBirth, ImageIcon photo) {
+        this.nif = nif;
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.photo = photo;
+
     }
 
     //Getters and Setters
@@ -97,6 +115,14 @@ public class Person implements Serializable{
         this.photo = photo;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public byte[] getPhotoOnlyJPA() {
         return photoOnlyJPA;
     }
@@ -104,11 +130,12 @@ public class Person implements Serializable{
     public void setPhotoOnlyJPA(byte[] photoOnlyJPA) {
         this.photoOnlyJPA = photoOnlyJPA;
     }
-        
+
     /**
      * Function used to compare two Personas. There cannot be two or more people
      * with the same ID. Actually it isn't used in this project.
-     * @return 
+     *
+     * @return
      */
     @Override
     public int hashCode() {
@@ -118,10 +145,11 @@ public class Person implements Serializable{
     }
 
     /**
-     * Function used to compare two Personas in ArrayList and HashMap 
+     * Function used to compare two Personas in ArrayList and HashMap
      * structures. There cannot be two or more people with the same ID.
+     *
      * @param obj
-     * @return 
+     * @return
      */
     @Override
     public boolean equals(Object obj) {
@@ -138,16 +166,16 @@ public class Person implements Serializable{
         return Objects.equals(this.hashCode(), other.hashCode());
     }
 
-    
     /**
-     * Function sed to show person's inform by console. Only for debugging 
+     * Function sed to show person's inform by console. Only for debugging
      * pourposes.
-     * @return 
+     *
+     * @return
      */
     @Override
     public String toString() {
         return "Person {" + "Name = " + name + ", NIF = " + nif
-                + ", DateOfBirth = " + dateOfBirth + ", Photo = " + (photo!=null) + "}";
+                + ", DateOfBirth = " + dateOfBirth + ", Photo = " + (photo != null) + "}";
     }
 
 }
