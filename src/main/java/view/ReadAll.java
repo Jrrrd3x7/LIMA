@@ -1,7 +1,6 @@
 package view;
 
 import controller.IController;
-import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -20,7 +19,6 @@ public class ReadAll extends javax.swing.JDialog {
     public ReadAll(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        jButton1.addActionListener(e -> controller.handleExportCSV());
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment((int)JTable.CENTER_ALIGNMENT);
         table.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );

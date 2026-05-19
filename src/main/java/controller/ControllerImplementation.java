@@ -231,7 +231,7 @@ public class ControllerImplementation implements IController, ActionListener {
 
     private void handleInsertAction() {
         insert = new Insert(menu, true, this);
-        insert.getInsert().addActionListener(this);
+        //insert.getInsert().addActionListener(this); lo llama 2 veces
         insert.setVisible(true);
     }
 
