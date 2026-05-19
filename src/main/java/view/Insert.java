@@ -68,6 +68,12 @@ public class Insert extends javax.swing.JDialog {
         return photo;
     }
 
+    public JTextField getPhone() {
+
+        return phone;
+
+    }
+
     private void setDatePickerButtonText(java.awt.Container container, String text) {
         for (java.awt.Component c : container.getComponents()) {
             if (c instanceof javax.swing.JButton btn) {
@@ -99,11 +105,11 @@ public class Insert extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         dateOfBirth = new org.jdatepicker.JDatePicker();
         jLabel3 = new javax.swing.JLabel();
-        name1 = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        name2 = new javax.swing.JTextField();
+        phone = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        name3 = new javax.swing.JTextField();
+        postalCode = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Insert - People v1.1.0");
@@ -139,6 +145,11 @@ public class Insert extends javax.swing.JDialog {
         name.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 nameMouseClicked(evt);
+            }
+        });
+        name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameActionPerformed(evt);
             }
         });
         name.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -203,6 +214,11 @@ public class Insert extends javax.swing.JDialog {
                 nifMouseClicked(evt);
             }
         });
+        nif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nifActionPerformed(evt);
+            }
+        });
         nif.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 nifKeyPressed(evt);
@@ -242,35 +258,35 @@ public class Insert extends javax.swing.JDialog {
         jLabel3.setMinimumSize(new java.awt.Dimension(100, 22));
         jLabel3.setPreferredSize(new java.awt.Dimension(100, 22));
 
-        name1.setForeground(new java.awt.Color(153, 153, 153));
-        name1.setText("Enter email");
-        name1.setMaximumSize(new java.awt.Dimension(400, 22));
-        name1.setMinimumSize(new java.awt.Dimension(400, 22));
-        name1.setPreferredSize(new java.awt.Dimension(400, 22));
-        name1.addFocusListener(new java.awt.event.FocusAdapter() {
+        email.setForeground(new java.awt.Color(153, 153, 153));
+        email.setText("Enter email");
+        email.setMaximumSize(new java.awt.Dimension(400, 22));
+        email.setMinimumSize(new java.awt.Dimension(400, 22));
+        email.setPreferredSize(new java.awt.Dimension(400, 22));
+        email.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                name1FocusLost(evt);
+                emailFocusLost(evt);
             }
         });
-        name1.addMouseListener(new java.awt.event.MouseAdapter() {
+        email.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                name1MouseClicked(evt);
+                emailMouseClicked(evt);
             }
         });
-        name1.addActionListener(new java.awt.event.ActionListener() {
+        email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                name1ActionPerformed(evt);
+                emailActionPerformed(evt);
             }
         });
-        name1.addKeyListener(new java.awt.event.KeyAdapter() {
+        email.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                name1KeyPressed(evt);
+                emailKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                name1KeyReleased(evt);
+                emailKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                name1KeyTyped(evt);
+                emailKeyTyped(evt);
             }
         });
 
@@ -280,30 +296,38 @@ public class Insert extends javax.swing.JDialog {
         jLabel4.setMinimumSize(new java.awt.Dimension(100, 22));
         jLabel4.setPreferredSize(new java.awt.Dimension(100, 22));
 
-        name2.setForeground(new java.awt.Color(153, 153, 153));
-        name2.setText("Enter phone number");
-        name2.setMaximumSize(new java.awt.Dimension(400, 22));
-        name2.setMinimumSize(new java.awt.Dimension(400, 22));
-        name2.setPreferredSize(new java.awt.Dimension(400, 22));
-        name2.addFocusListener(new java.awt.event.FocusAdapter() {
+        phone.setForeground(new java.awt.Color(153, 153, 153));
+        phone.setText("Enter phone number");
+        phone.setMaximumSize(new java.awt.Dimension(400, 22));
+        phone.setMinimumSize(new java.awt.Dimension(400, 22));
+        phone.setPreferredSize(new java.awt.Dimension(400, 22));
+        phone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                phoneFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                name2FocusLost(evt);
+                phoneFocusLost(evt);
             }
         });
-        name2.addMouseListener(new java.awt.event.MouseAdapter() {
+        phone.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                name2MouseClicked(evt);
+                phoneMouseClicked(evt);
             }
         });
-        name2.addKeyListener(new java.awt.event.KeyAdapter() {
+        phone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phoneActionPerformed(evt);
+            }
+        });
+        phone.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                name2KeyPressed(evt);
+                phoneKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                name2KeyReleased(evt);
+                phoneKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                name2KeyTyped(evt);
+                phoneKeyTyped(evt);
             }
         });
 
@@ -313,30 +337,30 @@ public class Insert extends javax.swing.JDialog {
         jLabel6.setMinimumSize(new java.awt.Dimension(100, 22));
         jLabel6.setPreferredSize(new java.awt.Dimension(100, 22));
 
-        name3.setForeground(new java.awt.Color(153, 153, 153));
-        name3.setText("Enter postal code");
-        name3.setMaximumSize(new java.awt.Dimension(400, 22));
-        name3.setMinimumSize(new java.awt.Dimension(400, 22));
-        name3.setPreferredSize(new java.awt.Dimension(400, 22));
-        name3.addFocusListener(new java.awt.event.FocusAdapter() {
+        postalCode.setForeground(new java.awt.Color(153, 153, 153));
+        postalCode.setText("Enter postal code");
+        postalCode.setMaximumSize(new java.awt.Dimension(400, 22));
+        postalCode.setMinimumSize(new java.awt.Dimension(400, 22));
+        postalCode.setPreferredSize(new java.awt.Dimension(400, 22));
+        postalCode.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                name3FocusLost(evt);
+                postalCodeFocusLost(evt);
             }
         });
-        name3.addMouseListener(new java.awt.event.MouseAdapter() {
+        postalCode.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                name3MouseClicked(evt);
+                postalCodeMouseClicked(evt);
             }
         });
-        name3.addKeyListener(new java.awt.event.KeyAdapter() {
+        postalCode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                name3KeyPressed(evt);
+                postalCodeKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                name3KeyReleased(evt);
+                postalCodeKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                name3KeyTyped(evt);
+                postalCodeKeyTyped(evt);
             }
         });
 
@@ -370,15 +394,15 @@ public class Insert extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(24, 24, 24)
-                                .addComponent(name1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(24, 24, 24)
-                                .addComponent(name2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(24, 24, 24)
-                                .addComponent(name3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(postalCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -403,15 +427,15 @@ public class Insert extends javax.swing.JDialog {
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(name1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(name2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(name3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(postalCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(insert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -438,6 +462,9 @@ public class Insert extends javax.swing.JDialog {
         nif.setText("");
         name.setText("");
         photo.setIcon(null);
+        email.setText("");
+        phone.setText("");
+        postalCode.setText("");
         //We reset the calendar date to the current date ...
         LocalDate dateLocate = LocalDate.now();
         ZoneId systemTimeZone = ZoneId.systemDefault();
@@ -533,69 +560,120 @@ public class Insert extends javax.swing.JDialog {
 
     }//GEN-LAST:event_nifFocusGained
 
-    private void name1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_name1FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_name1FocusLost
+    private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
+        if (email.getText().isEmpty()) {
+            email.setText(Placeholders.EMAIL);
+            email.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_emailFocusLost
 
-    private void name1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_name1MouseClicked
+    private void emailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailMouseClicked
+        if (email.getText().equals(Placeholders.EMAIL)) {
+            email.setText("");
+            email.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_emailMouseClicked
 
-    private void name1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name1KeyPressed
+    private void emailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_name1KeyPressed
+    }//GEN-LAST:event_emailKeyPressed
 
-    private void name1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name1KeyReleased
+    private void emailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_name1KeyReleased
+    }//GEN-LAST:event_emailKeyReleased
 
-    private void name1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name1KeyTyped
+    private void emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_name1KeyTyped
+    }//GEN-LAST:event_emailKeyTyped
 
-    private void name2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_name2FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_name2FocusLost
+    private void phoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phoneFocusLost
+        String phoneTxt = phone.getText();
+        if (phone.getText().isEmpty()) {
+            phone.setText(Placeholders.PHONE);
+            phone.setForeground(Color.gray);
+            return;
+        }
 
-    private void name2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_name2MouseClicked
+        if (phoneTxt.equals(Placeholders.PHONE)) {
+            return;
+        }
 
-    private void name2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name2KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_name2KeyPressed
+        if (!utils.DataValidation.isValidNum(phoneTxt)) {
+            JOptionPane.showMessageDialog(this, "Invalid format", this.getTitle(), JOptionPane.ERROR_MESSAGE);
+            phone.setText("");
+            phone.requestFocus();
+        }
 
-    private void name2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name2KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_name2KeyReleased
+    }//GEN-LAST:event_phoneFocusLost
 
-    private void name2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name2KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_name2KeyTyped
+    private void phoneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_phoneMouseClicked
+        /*if (phone.getText().equals(Placeholders.PHONE)) {
+            phone.setText("");
+            phone.setForeground(Color.black);
+        }
+         */
+    }//GEN-LAST:event_phoneMouseClicked
 
-    private void name3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_name3FocusLost
+    private void phoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phoneKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_name3FocusLost
+    }//GEN-LAST:event_phoneKeyPressed
 
-    private void name3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name3MouseClicked
+    private void phoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phoneKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_name3MouseClicked
+    }//GEN-LAST:event_phoneKeyReleased
 
-    private void name3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name3KeyPressed
+    private void phoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phoneKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_name3KeyPressed
+    }//GEN-LAST:event_phoneKeyTyped
 
-    private void name3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name3KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_name3KeyReleased
+    private void postalCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_postalCodeFocusLost
+        if (postalCode.getText().isEmpty()) {
+            postalCode.setText(Placeholders.POSTAL_CODE);
+            postalCode.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_postalCodeFocusLost
 
-    private void name3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name3KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_name3KeyTyped
+    private void postalCodeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postalCodeMouseClicked
+        if (postalCode.getText().equals(Placeholders.POSTAL_CODE)) {
+            postalCode.setText("");
+            postalCode.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_postalCodeMouseClicked
 
-    private void name1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name1ActionPerformed
+    private void postalCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_postalCodeKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_name1ActionPerformed
+    }//GEN-LAST:event_postalCodeKeyPressed
+
+    private void postalCodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_postalCodeKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_postalCodeKeyReleased
+
+    private void postalCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_postalCodeKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_postalCodeKeyTyped
+
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailActionPerformed
+
+    private void phoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneActionPerformed
+
+    private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameActionPerformed
+
+    private void nifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nifActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nifActionPerformed
+
+    private void phoneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phoneFocusGained
+        if (phone.getText().equals(Placeholders.PHONE)) {
+            phone.setText("");
+            phone.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_phoneFocusGained
     private void insertActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             controller.handleInsertPerson();
@@ -610,6 +688,7 @@ public class Insert extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdatepicker.JDatePicker dateOfBirth;
+    private javax.swing.JTextField email;
     private javax.swing.JButton insert;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -619,11 +698,10 @@ public class Insert extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField name;
-    private javax.swing.JTextField name1;
-    private javax.swing.JTextField name2;
-    private javax.swing.JTextField name3;
     private javax.swing.JTextField nif;
+    private javax.swing.JTextField phone;
     private javax.swing.JLabel photo;
+    private javax.swing.JTextField postalCode;
     private javax.swing.JButton reset;
     // End of variables declaration//GEN-END:variables
 }
