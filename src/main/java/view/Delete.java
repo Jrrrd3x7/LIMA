@@ -5,6 +5,8 @@
  */
 package view;
 
+import controller.ControllerImplementation;
+import java.awt.Color;
 import static utils.DataValidation.calculateNifLetter;
 import static utils.DataValidation.isNumber;
 
@@ -12,23 +14,29 @@ import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import utils.Placeholders;
 
 /**
  * Interface used to delete a person. It is mandatory to enter the NIF.
+ *
  * @author Francesc Perez
  * @version 1.1.0
  */
 public class Delete extends javax.swing.JDialog {
 
+    private ControllerImplementation controller;
+
     /**
      * Creates new form StudentDelete
+     *
      * @param parent
      * @param modal
      */
-    public Delete(java.awt.Frame parent, boolean modal) {
+    public Delete(java.awt.Frame parent, boolean modal, ControllerImplementation controller) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        this.controller = controller;
     }
 
     public JButton getDelete() {
@@ -42,7 +50,7 @@ public class Delete extends javax.swing.JDialog {
     public JButton getReset() {
         return reset;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,6 +91,11 @@ public class Delete extends javax.swing.JDialog {
         delete.setMaximumSize(new java.awt.Dimension(187, 33));
         delete.setMinimumSize(new java.awt.Dimension(187, 33));
         delete.setPreferredSize(new java.awt.Dimension(187, 33));
+        delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -91,9 +104,21 @@ public class Delete extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         getContentPane().add(delete, gridBagConstraints);
 
+        nif.setForeground(new java.awt.Color(153, 153, 153));
+        nif.setText("Enter NIF number, letter is calculated (e.g., 12345678)");
         nif.setMaximumSize(new java.awt.Dimension(400, 22));
         nif.setMinimumSize(new java.awt.Dimension(400, 22));
         nif.setPreferredSize(new java.awt.Dimension(400, 22));
+        nif.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nifFocusLost(evt);
+            }
+        });
+        nif.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nifMouseClicked(evt);
+            }
+        });
         nif.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 nifKeyPressed(evt);
@@ -155,7 +180,7 @@ public class Delete extends javax.swing.JDialog {
             delete.setEnabled(true);
         }
     }//GEN-LAST:event_nifKeyPressed
-   
+
     private void nifKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyReleased
         if (nif.getText().length() == 8) {
             nif.setText(calculateNifLetter(nif.getText()));
@@ -165,6 +190,10 @@ public class Delete extends javax.swing.JDialog {
     }//GEN-LAST:event_nifKeyReleased
 
     private void nifKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyTyped
+        if (nif.getText().equals(Placeholders.NIF)) {
+            nif.setText("");
+            nif.setForeground(java.awt.Color.BLACK);
+        }
         if (!isNumber(evt.getKeyChar()) && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE && evt.getKeyChar() != KeyEvent.VK_DELETE) {
             JOptionPane.showMessageDialog(this, "Type only numbers [0-9]", this.getTitle(), JOptionPane.ERROR_MESSAGE);
             evt.consume();
@@ -177,10 +206,41 @@ public class Delete extends javax.swing.JDialog {
         delete.setEnabled(false);
     }//GEN-LAST:event_resetActionPerformed
 
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this person?",
+                this.getTitle(),
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+        );
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                controller.handleDeletePerson();
+                JOptionPane.showMessageDialog(this, "Person deleted successfully!",
+                        this.getTitle(),
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+        }    }//GEN-LAST:event_deleteActionPerformed
+
+    private void nifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nifMouseClicked
+        if (nif.getText().equals(Placeholders.NIF)) {
+            nif.setText("");
+            nif.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_nifMouseClicked
+
+    private void nifFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nifFocusLost
+        if (nif.getText().isEmpty()) {
+            nif.setText(Placeholders.NIF);
+            nif.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_nifFocusLost
+
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton delete;

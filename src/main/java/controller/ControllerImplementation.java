@@ -22,12 +22,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -37,6 +41,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.jdatepicker.DateModel;
+import utils.Constants;
 
 /**
  * This class starts the visual part of the application and programs and manages
@@ -119,22 +124,22 @@ public class ControllerImplementation implements IController, ActionListener {
         String daoSelected = ((javax.swing.JCheckBox) (dSS.getAccept()[1])).getText();
         dSS.dispose();
         switch (daoSelected) {
-            case "ArrayList":
+            case Constants.ARRAY_LIST:
                 dao = new DAOArrayList();
                 break;
-            case "HashMap":
+            case Constants.HASH_MAP:
                 dao = new DAOHashMap();
                 break;
-            case "File":
+            case Constants.FILE:
                 setupFileStorage();
                 break;
-            case "File (Serialization)":
+            case Constants.FILE_SERIE:
                 setupFileSerialization();
                 break;
-            case "SQL - Database":
+            case Constants.SQL:
                 setupSQLDatabase();
                 break;
-            case "JPA - Database":
+            case Constants.JPA:
                 setupJPADatabase();
                 break;
         }
@@ -220,12 +225,12 @@ public class ControllerImplementation implements IController, ActionListener {
     }
 
     private void handleInsertAction() {
-        insert = new Insert(menu, true);
+        insert = new Insert(menu, true, this);
         insert.getInsert().addActionListener(this);
         insert.setVisible(true);
     }
 
-    private void handleInsertPerson() {
+    public void handleInsertPerson() {
         Person p = new Person(insert.getNam().getText(), insert.getNif().getText());
         if (insert.getDateOfBirth().getModel().getValue() != null) {
             p.setDateOfBirth(((GregorianCalendar) insert.getDateOfBirth().getModel().getValue()).getTime());
@@ -266,7 +271,7 @@ public class ControllerImplementation implements IController, ActionListener {
     }
 
     public void handleDeleteAction() {
-        delete = new Delete(menu, true);
+        delete = new Delete(menu, true, this);
         delete.getDelete().addActionListener(this);
         delete.setVisible(true);
     }
@@ -280,7 +285,7 @@ public class ControllerImplementation implements IController, ActionListener {
     }
 
     public void handleUpdateAction() {
-        update = new Update(menu, true);
+        update = new Update(menu, true, this);
         update.getUpdate().addActionListener(this);
         update.getRead().addActionListener(this);
         update.setVisible(true);
@@ -334,6 +339,7 @@ public class ControllerImplementation implements IController, ActionListener {
             JOptionPane.showMessageDialog(menu, "There are not people registered yet.", "Read All - People v1.1.0", JOptionPane.WARNING_MESSAGE);
         } else {
             readAll = new ReadAll(menu, true);
+            this.readAll.setController(this); //botón  dentro de ReadAll pueda llama controller.handleExportCSV()
             DefaultTableModel model = (DefaultTableModel) readAll.getTable().getModel();
             for (int i = 0; i < s.size(); i++) {
                 model.addRow(new Object[i]);
@@ -354,25 +360,52 @@ public class ControllerImplementation implements IController, ActionListener {
         }
     }
 
+    @Override
+    public void handleExportCSV() {
+        //Obtiene la fecha actual
+        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        File file = new File("people_data_" + date + ".csv");
+
+        // Llama al método readAll() del controlador, que devuelve todas las personas del DAO
+        ArrayList<Person> people = readAll();
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
+            // Itera sobre cada persona del ArrayList
+            for (Person person : people) {
+                writer.println(String.join(",",
+                        person.getNif(),
+                        person.getName(),
+                        person.getDateOfBirth() != null ? person.getDateOfBirth().toString() : "",
+                        person.getPhoto() != null ? "yes" : "no"
+                ));
+            }
+
+            JOptionPane.showMessageDialog(menu, "Data exported successfully as people_data_" + date + ".csv");
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
     public void handleDeleteAll() {
         Object[] options = {"Yes", "No"};
         //int answer = JOptionPane.showConfirmDialog(menu, "Are you sure to delete all people registered?", "Delete All - People v1.1.0", 0, 0);
         int answer = JOptionPane.showOptionDialog(
-        menu,
-        "Are you sure you want to delete all registered people?", 
-        "Delete All - People v1.1.0",
-        JOptionPane.YES_NO_OPTION,
-        JOptionPane.WARNING_MESSAGE,
-        null,
-        options,
-        options[1] // Default selection is "No"
-    );
+                menu,
+                "Are you sure you want to delete all registered people?",
+                "Delete All - People v1.1.0",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                options,
+                options[1] // Default selection is "No"
+        );
 
         if (answer == 0) {
             deleteAll();
+            JOptionPane.showMessageDialog(null, "All persons have been deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
+
     /**
      * This function inserts the Person object with the requested NIF, if it
      * doesn't exist. If there is any access problem with the storage device,
@@ -516,6 +549,7 @@ public class ControllerImplementation implements IController, ActionListener {
     @Override
     public void deleteAll() {
         try {
+
             dao.deleteAll();
         } catch (Exception ex) {
             if (ex instanceof FileNotFoundException || ex instanceof IOException
